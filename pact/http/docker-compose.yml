@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  pactbroker-db:
+    image: postgres:latest
+    container_name: pactbroker-db
+    healthcheck:
+      test: psql postgres --command "select 1" -U admin
+      interval: 1s
+      timeout: 5s
+      retries: 3
+    volumes:
+      - /var/lib/postgresql/data:/var/lib/postgresql/data
+      - ./config/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=xxx
+      - PGDATA=/var/lib/postgresql/data/pgdata
+
+  pactbroker:
+    image: pactfoundation/pact-broker
+    depends_on:
+      pactbroker-db:
+        condition: service_healthy
+    container_name: pactbroker
+    ports:
+      - "9292:9292"
+    links:
+      - pactbroker-db:postgres
+    environment:
+      - PACT_BROKER_DATABASE_USERNAME=pactbrokeruser
+      - PACT_BROKER_DATABASE_PASSWORD=xxx
+      - PACT_BROKER_DATABASE_HOST=postgres
+      - PACT_BROKER_DATABASE_NAME=pactbroker
+      - PACT_BROKER_BASIC_AUTH_ENABLED=true
+      - PACT_BROKER_BASIC_AUTH_USERNAME=pact-user
+      - PACT_BROKER_BASIC_AUTH_PASSWORD=123
+      - PACT_BROKER_BASIC_AUTH_READ_ONLY_USERNAME=pact-user-read-only
+      - PACT_BROKER_BASIC_AUTH_READ_ONLY_PASSWORD=456

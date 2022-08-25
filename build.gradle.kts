@@ -7,6 +7,7 @@ plugins {
     id("org.springframework.boot") version "2.7.0" apply false
     id("io.spring.dependency-management") version "1.0.11.RELEASE" apply false
     id("org.springframework.cloud.contract") version "3.1.1" apply false
+    id("au.com.dius.pact") version "4.3.10" apply false
 
     kotlin("jvm") version "1.6.21" apply false
     kotlin("plugin.spring") version "1.6.21" apply false

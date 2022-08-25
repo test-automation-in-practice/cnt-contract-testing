@@ -6,8 +6,8 @@ subprojects {
     }
     the<DependencyManagementExtension>().apply {
         dependencies {
-            dependency("au.com.dius.pact.consumer:junit5:4.3.6")
-            dependency("au.com.dius.pact.provider:junit5:4.3.6")
+            dependency("au.com.dius.pact.consumer:junit5:4.3.10")
+            dependency("au.com.dius.pact.provider:junit5:4.3.10")
         }
     }
 }
