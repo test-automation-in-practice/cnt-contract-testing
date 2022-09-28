@@ -1,6 +1,7 @@
 plugins {
     id("org.springframework.boot")
     id("io.spring.dependency-management")
+    id("au.com.dius.pact")
 
     kotlin("jvm")
     kotlin("plugin.spring")
@@ -16,4 +17,11 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("au.com.dius.pact.provider:junit5")
     testImplementation("io.mockk:mockk")
+}
+
+tasks {
+    withType<Test> {
+        systemProperty("pact.verifier.publishResults", "true")
+        systemProperty("pact.provider.version", "0.1.0-SNAPSHOT")
+    }
 }

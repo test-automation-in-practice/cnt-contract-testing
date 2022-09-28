@@ -98,6 +98,23 @@ None of the consumers is interested in a book's `description` attribute.
 To demonstrate the advantages contract testing provides, the `description` can be deleted from the provider's `Book` definition without any of the consumers suffering any consequences.
 If any of the other attributes is changed at least one, if not both, of the contracts will break.
 
+=== The Pact Broker
+
+Opting for a contract-based testing approach requires the exchange of the generated contracts. The straight-forward
+solution is to simply transfer the files manually, via email or USB stick. This will work for relatively small and
+well-connected ecosystems, but is unlikely to scale for larger service networks.
+
+The official answer to this issue is the Pact Broker - a contract database (and web frontend) where pacts can be
+automatically uploaded to and downloaded from, and which is able to track your services' compatibility matrix - the
+insight into which versions of a provider are compatible with which versions of its consumers.
+
+The Http module provides examples for the use of a pact broker. A `docker-compose` file is included which will launch an
+instance of a pact broker and the postgres database that it requires. Once the broker is up and running the consumers'
+generated contracts can be uploaded using the `pactPublish` gradle task. On the provider side a contract test using the
+broker is defined in `ContractTestWithPactBroker`.
+
+The broker frontend is available at `http://localhost:9292/`, the username/password is pact-user/123.
+
 === Messaging module
 
 **provider:** A simple "Library Service" that notifies consumers about the creation of new books by pushing notifications to a message

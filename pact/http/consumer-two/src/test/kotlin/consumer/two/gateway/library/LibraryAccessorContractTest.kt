@@ -11,7 +11,9 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
-// This consumer-side tests defines an interaction using a parameterized 'given' state callback
+// This consumer-side test defines an interaction using a parameterized 'given' state callback
+// Configuring the pact broker connect in the code is not necessary, the created pacts can
+// be uploaded with gradle's `pactPublish` task
 
 @ExtendWith(PactConsumerTestExt::class)
 internal class LibraryAccessorContractTest {
