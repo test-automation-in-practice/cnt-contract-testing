@@ -23,5 +23,7 @@ tasks {
     withType<Test> {
         systemProperty("pact.verifier.publishResults", "true")
         systemProperty("pact.provider.version", "0.1.0-SNAPSHOT")
+        systemProperty("pactbroker.auth.username", "pact-user")
+        systemProperty("pactbroker.auth.password", "123")
     }
 }
