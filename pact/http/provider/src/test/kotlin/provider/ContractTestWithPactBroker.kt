@@ -42,10 +42,6 @@ import kotlin.text.Charsets.UTF_8
 @Provider("provider") // load all contracts for the provider named "provider"
 @PactBroker( // configure the connection to the pact broker and which pacts to use
     url = "http://localhost:9292",
-    authentication = PactBrokerAuth(
-        username = "pact-user",
-        password = "123"
-    ),
     consumerVersionSelectors = [
         VersionSelector(
             consumer = "consumer-one",
